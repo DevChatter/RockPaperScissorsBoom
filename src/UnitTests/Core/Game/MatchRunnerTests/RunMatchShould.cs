@@ -9,7 +9,7 @@ namespace UnitTests.Core.Game.MatchRunnerTests
     public class RunMatchShould
     {
         [Fact]
-        public void ReturnFoo_GivenBar()
+        public void ReturnSimpleMatchResult_GivenStaticBots()
         {
             var matchRunner = new MatchRunner();
 
