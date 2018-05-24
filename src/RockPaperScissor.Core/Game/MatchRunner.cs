@@ -19,17 +19,16 @@ namespace RockPaperScissor.Core.Game
                 roundResults.Add(previoResult);
             }
 
-            return GetMatchResultFromRoundResults(roundResults);
-
+            return GetMatchResultFromRoundResults(player1, player2, roundResults);
         }
 
-        private MatchResult GetMatchResultFromRoundResults(List<RoundResult> roundResults)
+        private MatchResult GetMatchResultFromRoundResults(IBot player1, IBot player2, List<RoundResult> roundResults)
         {
             var matchResult = new MatchResult();
 
-            var orderedPlayers = roundResults.GroupBy(x => x.Winner).OrderByDescending(x => x.Count()).Select(x => x.Key).ToList();
-            matchResult.Winner = orderedPlayers.First();
-            matchResult.Loser = orderedPlayers.Last();
+            var winner = roundResults.GroupBy(x => x.Winner).OrderByDescending(x => x.Count()).Select(x => x.Key).First();
+            matchResult.Winner = winner;
+            matchResult.Loser = winner == player1 ? player2 : player1;
 
             matchResult.RoundResults = roundResults;
 
