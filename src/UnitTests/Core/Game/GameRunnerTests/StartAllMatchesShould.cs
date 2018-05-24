@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FluentAssertions;
 using RockPaperScissor.Core.Game;
+using RockPaperScissor.Core.Game.Bots;
 using Xunit;
 
 namespace UnitTests.Core.Game.GameRunnerTests
@@ -21,7 +22,7 @@ namespace UnitTests.Core.Game.GameRunnerTests
         public void ReturnOneBot_GivenOneBotCompeting()
         {
             var gameRunner = new GameRunner();
-            gameRunner.AddBot(new NoOpBot());
+            gameRunner.AddBot(new RockOnlyBot("Rocky"));
 
             var result = gameRunner.StartAllMatches();
 
