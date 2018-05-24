@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RockPaperScissor.Core.Game.Results;
 
 namespace RockPaperScissor.Core.Game
@@ -18,7 +19,21 @@ namespace RockPaperScissor.Core.Game
                 roundResults.Add(previoResult);
             }
 
-            return new MatchResult {Winner = player1, Loser = player2, RoundResults = roundResults};
+            return GetMatchResultFromRoundResults(roundResults);
+
+        }
+
+        private MatchResult GetMatchResultFromRoundResults(List<RoundResult> roundResults)
+        {
+            var matchResult = new MatchResult();
+
+            var orderedPlayers = roundResults.GroupBy(x => x.Winner).OrderByDescending(x => x.Count()).Select(x => x.Key).ToList();
+            matchResult.Winner = orderedPlayers.First();
+            matchResult.Loser = orderedPlayers.Last();
+
+            matchResult.RoundResults = roundResults;
+
+            return matchResult;
         }
     }
 }

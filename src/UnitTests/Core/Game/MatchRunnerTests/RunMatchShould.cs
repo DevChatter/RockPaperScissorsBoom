@@ -8,17 +8,27 @@ namespace UnitTests.Core.Game.MatchRunnerTests
 {
     public class RunMatchShould
     {
+        private readonly MatchRunner _matchRunner = new MatchRunner();
+        private readonly IBot _rockOnly = new RockOnlyBot("The Rock");
+        private readonly IBot _scissorsOnly = new ScissorsOnlyBot("Fulcrum Master");
+
         [Fact]
         public void ReturnSimpleMatchResult_GivenStaticBots()
         {
-            var matchRunner = new MatchRunner();
+            MatchResult matchResult = _matchRunner.RunMatch(_rockOnly, _scissorsOnly);
 
-            var player1 = new RockOnlyBot("The Rock");
-            var player2 = new ScissorsOnlyBot("Fulcrum Master");
-            MatchResult matchResult = matchRunner.RunMatch(player1, player2);
+            matchResult.Winner.Should().Be(_rockOnly);
+            matchResult.Loser.Should().Be(_scissorsOnly);
+            matchResult.RoundResults.Count.Should().Be(1000);
+        }
 
-            matchResult.Winner.Should().Be(player1);
-            matchResult.Loser.Should().Be(player2);
+        [Fact]
+        public void WorkCorrectly()
+        {
+            MatchResult matchResult = _matchRunner.RunMatch(_scissorsOnly, _rockOnly);
+
+            matchResult.Winner.Should().Be(_rockOnly);
+            matchResult.Loser.Should().Be(_scissorsOnly);
             matchResult.RoundResults.Count.Should().Be(1000);
         }
     }
