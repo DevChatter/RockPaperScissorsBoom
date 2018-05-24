@@ -17,6 +17,4 @@ This server project provides an API that developers can use to develop bots that
  * All matching choices will be a tie with the same choice by opponent.
  * Each bot may also throw a water balloon whenever it likes.
 
-![game uml][game_diagram]
-
-[game_diagram]:(docs/game_diagram.png)
+![game uml](docs/game_diagram.png)
