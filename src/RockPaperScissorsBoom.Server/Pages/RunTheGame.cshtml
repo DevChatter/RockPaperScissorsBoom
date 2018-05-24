@@ -1,5 +1,5 @@
 ﻿@page
-@model RockPaperScissorsBoom.Server.Pages.RunTheGameModel
+@model RunTheGameModel
 
 @{
     ViewData["Title"] = "RunTheGame";
@@ -8,7 +8,7 @@
 <h2>Bot Results</h2>
 
 <ul>
-    @foreach (BotRanking botRank in Model.BotRankings)
+    @foreach (var botRank in Model.BotRankings)
     {
         <li>@botRank.Rank) @botRank.BotName: @botRank.Wins-@botRank.Losses</li>
     }

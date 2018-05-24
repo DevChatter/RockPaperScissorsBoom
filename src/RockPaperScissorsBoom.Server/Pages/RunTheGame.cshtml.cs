@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RockPaperScissor.Core;
 
 namespace RockPaperScissorsBoom.Server.Pages
 {
@@ -17,13 +18,5 @@ namespace RockPaperScissorsBoom.Server.Pages
         }
 
         public IEnumerable<BotRanking> BotRankings { get; set; }
-    }
-
-    public class BotRanking
-    {
-        public string BotName { get; set; }
-        public int Rank { get; set; }
-        public int Wins { get; set; }
-        public int Losses { get; set; }
     }
 }
