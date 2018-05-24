@@ -27,8 +27,6 @@ namespace UnitTests.Core.Game.GameRunnerTests
             var result = gameRunner.StartAllMatches();
 
             result.Should().ContainSingle();
-            result.Single().Rank.Should().Be(1);
         }
-
     }
 }

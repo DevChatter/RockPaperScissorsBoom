@@ -8,9 +8,10 @@
 <h2>Bot Results</h2>
 
 <ul>
-    @foreach (var botRank in Model.BotRankings)
+    @for (int rank = 1; rank <= Model.BotRankings.Count(); rank++)
     {
-        <li>@botRank.Rank) @botRank.BotName: @botRank.Wins-@botRank.Losses</li>
+        var botRank = Model.BotRankings[rank-1];
+        <li>@rank) @botRank.BotName: @botRank.Wins-@botRank.Losses</li>
     }
 </ul>
 

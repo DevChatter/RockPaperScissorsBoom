@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RockPaperScissor.Core;
+using RockPaperScissor.Core.Game;
+using RockPaperScissor.Core.Game.Bots;
 
 namespace RockPaperScissorsBoom.Server.Pages
 {
@@ -8,15 +11,16 @@ namespace RockPaperScissorsBoom.Server.Pages
     {
         public void OnGet()
         {
-            BotRankings = new List<BotRanking>
-            {
-                new BotRanking("Bot1", 1, 3, 0),
-                new BotRanking("Bot3", 2, 2, 1),
-                new BotRanking("Bot4", 4, 0, 3),
-                new BotRanking("Bot2", 3, 1, 2),
-            };
+            var gameRunner = new GameRunner();
+
+            gameRunner.AddBot(new RockOnlyBot("Rocky"));
+            gameRunner.AddBot(new PaperOnlyBot("Paper"));
+            gameRunner.AddBot(new ScissorsOnlyBot("Sharpy"));
+            gameRunner.AddBot(new WaterOnlyBot("All Washed Up"));
+
+            BotRankings = gameRunner.StartAllMatches().OrderByDescending(x => x.Wins).ToList();
         }
 
-        public IEnumerable<BotRanking> BotRankings { get; set; }
+        public List<BotRanking> BotRankings { get; set; }
     }
 }
