@@ -11,12 +11,12 @@ namespace RockPaperScissor.Core.Game
             var roundResults = new List<RoundResult>();
             var roundRunner = new RoundRunner();
 
-            RoundResult previoResult = new RoundResult();
+            RoundResult previousResult = new RoundResult();
 
             for (int i = 0; i < 1000; i++)
             {
-                previoResult = roundRunner.RunRound(player1, player2, previoResult);
-                roundResults.Add(previoResult);
+                previousResult = roundRunner.RunRound(player1, player2, previousResult);
+                roundResults.Add(previousResult);
             }
 
             return GetMatchResultFromRoundResults(player1, player2, roundResults);
