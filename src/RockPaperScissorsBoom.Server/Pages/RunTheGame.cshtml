@@ -1,0 +1,23 @@
+﻿@page
+@model RunTheGameModel
+
+@{
+    ViewData["Title"] = "RunTheGame";
+}
+
+<h2>Bot Results</h2>
+
+<ul>
+    @for (int rank = 1; rank <= Model.BotRankings.Count(); rank++)
+    {
+        var botRank = Model.BotRankings[rank-1];
+        <li>@rank) @botRank.BotName: @botRank.Wins-@botRank.Losses</li>
+    }
+</ul>
+
+<h3>Full Game Results</h3>
+
+
+<ul>
+    <li>Coming soon...</li>
+</ul>
