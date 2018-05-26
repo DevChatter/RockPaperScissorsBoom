@@ -14,7 +14,7 @@ namespace UnitTests.Core.Extensions.DecisionExtensionsTests
         [InlineData(Decision.WaterBalloon, Decision.Dynamite)]
         public void ReturnTrue_GivenWinningCases(Decision d1, Decision d2)
         {
-            bool result = d1.IsWinnerAgainst(d2);
+            bool result = d1.IsWinnerAgainst(ref d2);
 
             result.Should().BeTrue();
         }
@@ -25,7 +25,7 @@ namespace UnitTests.Core.Extensions.DecisionExtensionsTests
         [InlineData(Decision.Paper, Decision.WaterBalloon)]
         public void ReturnTrue_GivenClassicAgainstWater(Decision d1, Decision d2)
         {
-            bool result = d1.IsWinnerAgainst(d2);
+            bool result = d1.IsWinnerAgainst(ref d2);
 
             result.Should().BeTrue();
         }
@@ -36,7 +36,7 @@ namespace UnitTests.Core.Extensions.DecisionExtensionsTests
         [InlineData(Decision.Dynamite, Decision.Scissors)]
         public void ReturnTrue_GivenDynamiteAgainstClassic(Decision d1, Decision d2)
         {
-            bool result = d1.IsWinnerAgainst(d2);
+            bool result = d1.IsWinnerAgainst(ref d2);
 
             result.Should().BeTrue();
         }
@@ -48,7 +48,7 @@ namespace UnitTests.Core.Extensions.DecisionExtensionsTests
         [InlineData(Decision.Dynamite, Decision.WaterBalloon)]
         public void ReturnFalse_GivenLosingCases(Decision d1, Decision d2)
         {
-            bool result = d1.IsWinnerAgainst(d2);
+            bool result = d1.IsWinnerAgainst(ref d2);
 
             result.Should().BeFalse();
         }
@@ -59,7 +59,7 @@ namespace UnitTests.Core.Extensions.DecisionExtensionsTests
         [InlineData(Decision.WaterBalloon, Decision.Scissors)]
         public void ReturnFalse_GivenWaterAgainstClassic(Decision d1, Decision d2)
         {
-            bool result = d1.IsWinnerAgainst(d2);
+            bool result = d1.IsWinnerAgainst(ref d2);
 
             result.Should().BeFalse();
         }
@@ -70,7 +70,7 @@ namespace UnitTests.Core.Extensions.DecisionExtensionsTests
         [InlineData(Decision.Scissors, Decision.Dynamite)]
         public void ReturnFalse_GivenClassicAgainstDynamite(Decision d1, Decision d2)
         {
-            bool result = d1.IsWinnerAgainst(d2);
+            bool result = d1.IsWinnerAgainst(ref d2);
 
             result.Should().BeFalse();
         }

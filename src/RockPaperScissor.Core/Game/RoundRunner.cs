@@ -15,7 +15,7 @@ namespace RockPaperScissor.Core.Game
             {
                 // tie
             }
-            else if (p1Decision.IsWinnerAgainst(p2Decision))
+            else if (p1Decision.IsWinnerAgainst(ref p2Decision))
             {
                 winner = player1;
             }
