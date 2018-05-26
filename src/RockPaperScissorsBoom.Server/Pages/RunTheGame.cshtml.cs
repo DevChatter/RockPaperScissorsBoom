@@ -17,6 +17,7 @@ namespace RockPaperScissorsBoom.Server.Pages
             gameRunner.AddBot(new PaperOnlyBot("Paper"));
             gameRunner.AddBot(new ScissorsOnlyBot("Sharpy"));
             gameRunner.AddBot(new WaterOnlyBot("All Washed Up"));
+            gameRunner.AddBot(new CleverBot());
 
             BotRankings = gameRunner.StartAllMatches().OrderByDescending(x => x.Wins).ToList();
         }

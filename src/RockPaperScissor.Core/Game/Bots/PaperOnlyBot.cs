@@ -10,6 +10,6 @@ namespace RockPaperScissor.Core.Game.Bots
         }
 
         public string Name { get; }
-        public Decision GetDecision(RoundResult previousResult) => Decision.Paper;
+        public Decision GetDecision(PreviousDecisionResult previousResult) => Decision.Paper;
     }
 }
