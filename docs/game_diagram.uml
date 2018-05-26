@@ -3,13 +3,13 @@
 title Rock Paper Scissors Dynamite
 
 (Rock) -> (Scissors)
-(Water Baloon) <-- (Rock)
+(Water Balloon) <-- (Rock)
 (Scissors) -> (Paper)
-(Water Baloon) <-- (Scissors)
+(Water Balloon) <-- (Scissors)
 (Paper) --> (Rock)
-(Water Baloon) <-- (Paper)
+(Water Balloon) <-- (Paper)
 (Dynamite) --> (Scissors) 
 (Dynamite) --> (Paper) 
 (Dynamite) --> (Rock)
-(Dynamite) <-- (Water Baloon)
+(Dynamite) <-- (Water Balloon)
 @enduml
