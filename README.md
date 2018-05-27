@@ -10,10 +10,10 @@ This server project provides an API that developers can use to develop bots that
  * Rock beats Scissors
  * Scissors beats Paper
  * Paper beats Rock
- * A bomb will defeat Rock, Paper, or Scissors played by the opponent.
- * A water balloon will defeat a bomb.
+ * A dynamite will defeat Rock, Paper, or Scissors played by the opponent.
+ * A water balloon will defeat a dynamite.
  * Rock, Paper, and Scissors all beat water balloon.
- * Each bot receives 100 bombs to use during a match.
+ * Each bot receives 100 sticks of dynamite to use during a match.
  * All matching choices will be a tie with the same choice by opponent.
  * Each bot may also throw a water balloon whenever it likes.
 
