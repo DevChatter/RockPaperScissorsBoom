@@ -1,8 +1,8 @@
-﻿namespace RockPaperScissor.Core
+﻿namespace RockPaperScissor.Core.Model
 {
-    public class BotRanking
+    public class BotRecord
     {
-        public BotRanking(string botName, int wins, int losses)
+        public BotRecord(string botName, int wins, int losses)
         {
             BotName = botName;
             Wins = wins;

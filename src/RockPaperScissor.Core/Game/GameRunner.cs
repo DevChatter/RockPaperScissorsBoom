@@ -1,7 +1,7 @@
-﻿using System;
+﻿using RockPaperScissor.Core.Game.Results;
+using RockPaperScissor.Core.Model;
 using System.Collections.Generic;
 using System.Linq;
-using RockPaperScissor.Core.Game.Results;
 
 namespace RockPaperScissor.Core.Game
 {
@@ -9,7 +9,7 @@ namespace RockPaperScissor.Core.Game
     {
         private readonly List<IBot> _competitors = new List<IBot>();
 
-        public List<BotRanking> StartAllMatches()
+        public List<BotRecord> StartAllMatches()
         {
             var matchRunner = new MatchRunner();
 
@@ -26,16 +26,16 @@ namespace RockPaperScissor.Core.Game
             return GetBotRankingsFromMatchResults(matchResults);
         }
 
-        public List<BotRanking> GetBotRankingsFromMatchResults(List<MatchResult> matchResults)
+        public List<BotRecord> GetBotRankingsFromMatchResults(List<MatchResult> matchResults)
         {
-            var botRankings = new List<BotRanking>();
+            var botRankings = new List<BotRecord>();
 
             foreach (IBot competitor in _competitors)
             {
                 int wins = matchResults.Count(x => x.Winner == competitor);
                 int losses = matchResults.Count(x => x.Loser == competitor);
 
-                botRankings.Add(new BotRanking(competitor.Name, wins, losses));
+                botRankings.Add(new BotRecord(competitor.Name, wins, losses));
             }
 
             return botRankings;
