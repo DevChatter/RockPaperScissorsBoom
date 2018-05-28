@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using RockPaperScissor.Core;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using RockPaperScissor.Core.Game;
 using RockPaperScissor.Core.Game.Bots;
 using RockPaperScissor.Core.Model;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RockPaperScissorsBoom.Server.Pages
 {

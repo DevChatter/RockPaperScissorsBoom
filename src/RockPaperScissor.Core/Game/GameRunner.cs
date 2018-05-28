@@ -1,8 +1,7 @@
-﻿using System;
+﻿using RockPaperScissor.Core.Game.Results;
+using RockPaperScissor.Core.Model;
 using System.Collections.Generic;
 using System.Linq;
-using RockPaperScissor.Core.Game.Results;
-using RockPaperScissor.Core.Model;
 
 namespace RockPaperScissor.Core.Game
 {
