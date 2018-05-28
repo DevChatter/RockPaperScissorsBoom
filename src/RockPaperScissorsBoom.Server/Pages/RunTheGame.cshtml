@@ -7,17 +7,25 @@
 
 <h2>Bot Results</h2>
 
-<ul>
-    @for (int rank = 1; rank <= Model.BotRankings.Count(); rank++)
+<ol>
+    @foreach(var botRank in Model.BotRankings)
     {
-        var botRank = Model.BotRankings[rank-1];
-        <li>@rank) @botRank.BotName: @botRank.Wins-@botRank.Losses</li>
+        <li>@botRank.BotName: @botRank.Wins-@botRank.Losses</li>
     }
-</ul>
+</ol>
 
 <h3>Full Game Results</h3>
 
-
-<ul>
-    <li>Coming soon...</li>
-</ul>
+@foreach (var fullResults in Model.AllFullResults)
+{
+    <div>
+        <h4>Results for @fullResults.BotName</h4>
+            @foreach (var matchResult in fullResults.MatchResults)
+            {
+                <ul>
+                    <li>Winner: @matchResult.Winner.Name</li>
+                    <li>Loser: @matchResult.Loser.Name</li>
+                </ul>
+            }
+    </div>
+}

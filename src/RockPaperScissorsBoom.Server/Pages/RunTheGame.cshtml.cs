@@ -19,9 +19,12 @@ namespace RockPaperScissorsBoom.Server.Pages
             gameRunner.AddBot(new WaterOnlyBot("All Washed Up"));
             gameRunner.AddBot(new CleverBot());
 
-            BotRankings = gameRunner.StartAllMatches().OrderByDescending(x => x.Wins).ToList();
+            var gameRunnerResult = gameRunner.StartAllMatches();
+            BotRankings = gameRunnerResult.BotRecords.OrderByDescending(x => x.Wins).ToList();
+            AllFullResults = gameRunnerResult.AllMatchResults.OrderBy(x => x.BotName).ToList();
         }
 
         public List<BotRecord> BotRankings { get; set; }
+        public List<FullResults> AllFullResults { get; set; }
     }
 }

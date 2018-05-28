@@ -9,7 +9,7 @@ namespace RockPaperScissor.Core.Game
     {
         private readonly List<IBot> _competitors = new List<IBot>();
 
-        public List<BotRecord> StartAllMatches()
+        public GameRunnerResult StartAllMatches()
         {
             var matchRunner = new MatchRunner();
 
@@ -26,7 +26,7 @@ namespace RockPaperScissor.Core.Game
             return GetBotRankingsFromMatchResults(matchResults);
         }
 
-        public List<BotRecord> GetBotRankingsFromMatchResults(List<MatchResult> matchResults)
+        public GameRunnerResult GetBotRankingsFromMatchResults(List<MatchResult> matchResults)
         {
             var botRankings = new List<BotRecord>();
 
@@ -38,7 +38,25 @@ namespace RockPaperScissor.Core.Game
                 botRankings.Add(new BotRecord(competitor.Name, wins, losses));
             }
 
-            return botRankings;
+            List<FullResults> allMatchResults = Foo(matchResults);
+            return new GameRunnerResult { BotRecords = botRankings, AllMatchResults = allMatchResults};
+        }
+
+        private static List<FullResults> Foo(List<MatchResult> matchResults)
+        {
+            var winnerNames = matchResults.Select(x => x.Winner.Name).Distinct();
+            var loserNames = matchResults.Select(x => x.Loser.Name).Distinct();
+
+            var allNames = winnerNames.Union(loserNames);
+
+            List<FullResults> allMatchResults = new List<FullResults>();
+            foreach (string name in allNames)
+            {
+                var collection = matchResults.Where(x => x.Winner.Name == name || x.Loser.Name == name).ToList();
+                allMatchResults.Add(new FullResults { BotName = name, MatchResults = collection});
+            }
+
+            return allMatchResults;
         }
 
         public void AddBot(IBot bot)
