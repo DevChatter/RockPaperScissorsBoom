@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RockPaperScissor.Core;
 using RockPaperScissor.Core.Game;
 using RockPaperScissor.Core.Game.Bots;
+using RockPaperScissor.Core.Model;
 
 namespace RockPaperScissorsBoom.Server.Pages
 {
@@ -22,6 +23,6 @@ namespace RockPaperScissorsBoom.Server.Pages
             BotRankings = gameRunner.StartAllMatches().OrderByDescending(x => x.Wins).ToList();
         }
 
-        public List<BotRanking> BotRankings { get; set; }
+        public List<BotRecord> BotRankings { get; set; }
     }
 }
