@@ -16,4 +16,9 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <ProjectReference Include="..\RockPaperScissor.Core\RockPaperScissor.Core.csproj" />
+  </ItemGroup>
+
+
 </Project>
