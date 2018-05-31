@@ -2,6 +2,7 @@
 using RockPaperScissor.Core.Game;
 using RockPaperScissor.Core.Game.Bots;
 using RockPaperScissor.Core.Game.Results;
+using UnitTests.Fakes;
 using Xunit;
 
 namespace UnitTests.Core.Game.RoundRunnerTests
@@ -69,6 +70,16 @@ namespace UnitTests.Core.Game.RoundRunnerTests
             int previousUsage = _dynamiteOnlyBot.DynamiteUsed;
             _roundRunner.RunRound(_dynamiteOnlyBot, _dynamiteOnlyBot, new RoundResult());
             _dynamiteOnlyBot.DynamiteUsed.Should().Be(previousUsage + 2);
+        }
+
+        [Fact]
+        public void IncrementDyanmite_EvenWhenInvalid()
+        {
+            int previousUsage = _dynamiteOnlyBot.DynamiteUsed;
+            var fakeBot = new FakeBot(Decision.Dynamite) {DynamiteUsed = 100};
+            _roundRunner.RunRound(_dynamiteOnlyBot, fakeBot, new RoundResult());
+            _dynamiteOnlyBot.DynamiteUsed.Should().Be(previousUsage + 1);
+            fakeBot.DynamiteUsed.Should().Be(101);
         }
     }
 }
