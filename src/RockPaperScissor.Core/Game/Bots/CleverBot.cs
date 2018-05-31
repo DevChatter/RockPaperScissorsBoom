@@ -1,5 +1,4 @@
-﻿using System;
-using RockPaperScissor.Core.Game.Results;
+﻿using RockPaperScissor.Core.Game.Results;
 
 namespace RockPaperScissor.Core.Game.Bots
 {

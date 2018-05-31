@@ -27,6 +27,8 @@ namespace RockPaperScissorsBoom.Server.Pages
             gameRunner.AddBot(new ScissorsOnlyBot("Sharpy"));
             gameRunner.AddBot(new WaterOnlyBot("All Washed Up"));
             gameRunner.AddBot(new CleverBot());
+            
+            gameRunner.AddBot(new RandomBot());
             //gameRunner.AddBot(new WebApiBot("Rockster, the Example", "https://localhost:44347/", _httpClientFactory));
 
             var gameRunnerResult = gameRunner.StartAllMatches();
