@@ -4,10 +4,13 @@ using System.Collections.Generic;
 
 namespace RockPaperScissor.Core.Game.Bots
 {
-    public class RandomBot : IBot
+    public class RandomBot : BaseBot
     {
-        public string Name { get; } = "Rando Carissian";
-        public Decision GetDecision(PreviousDecisionResult previousResult)
+        public RandomBot()
+        {
+            Name = "Rando Carissian";
+        }
+        public override Decision GetDecision(PreviousDecisionResult previousResult)
         {
             var decisions = new List<Decision> {
                 Decision.Dynamite,
