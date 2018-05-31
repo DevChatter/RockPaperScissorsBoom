@@ -1,12 +1,14 @@
-﻿using System;
-using RockPaperScissor.Core.Game.Results;
+﻿using RockPaperScissor.Core.Game.Results;
 
 namespace RockPaperScissor.Core.Game.Bots
 {
-    public class CleverBot : IBot
+    public class CleverBot : BaseBot
     {
-        public string Name { get; } = "Clever Bot";
-        public Decision GetDecision(PreviousDecisionResult previousResult)
+        public CleverBot()
+        {
+            Name = "Clever Bot";
+        }
+        public override Decision GetDecision(PreviousDecisionResult previousResult)
         {
             return GetDecisionThatBeats(previousResult.OpponentPrevious);
         }

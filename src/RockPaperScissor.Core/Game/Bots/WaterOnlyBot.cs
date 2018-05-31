@@ -2,14 +2,13 @@
 
 namespace RockPaperScissor.Core.Game.Bots
 {
-    public class WaterOnlyBot : IBot
+    public class WaterOnlyBot : BaseBot
     {
         public WaterOnlyBot(string name)
         {
             Name = name;
         }
 
-        public string Name { get; }
-        public Decision GetDecision(PreviousDecisionResult previousResult) => Decision.WaterBalloon;
+        public override Decision GetDecision(PreviousDecisionResult previousResult) => Decision.WaterBalloon;
     }
 }
