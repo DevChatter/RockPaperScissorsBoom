@@ -6,7 +6,7 @@ using Xunit;
 
 namespace UnitTests.Core.Game.RoundRunnerTests
 {
-    public class RoundRunnerShould
+    public class RunRoundShould
     {
         private readonly RockOnlyBot _rockOnlyBot = new RockOnlyBot("Rocky");
         private readonly PaperOnlyBot _paperOnlyBot = new PaperOnlyBot("Paper");
@@ -53,6 +53,22 @@ namespace UnitTests.Core.Game.RoundRunnerTests
 
             RoundResult waterWin = _roundRunner.RunRound(_waterOnlyBot, _dynamiteOnlyBot, new RoundResult());
             waterWin.Winner.Should().Be(_waterOnlyBot);
+        }
+
+        [Fact]
+        public void IncrementDyanmite_GivenOneDynamiteUsage()
+        {
+            int previousUsage = _dynamiteOnlyBot.DynamiteUsed;
+            _roundRunner.RunRound(_dynamiteOnlyBot, _rockOnlyBot, new RoundResult());
+            _dynamiteOnlyBot.DynamiteUsed.Should().Be(previousUsage + 1);
+        }
+
+        [Fact]
+        public void IncrementDyanmite_GivenTwoDynamiteUsage()
+        {
+            int previousUsage = _dynamiteOnlyBot.DynamiteUsed;
+            _roundRunner.RunRound(_dynamiteOnlyBot, _dynamiteOnlyBot, new RoundResult());
+            _dynamiteOnlyBot.DynamiteUsed.Should().Be(previousUsage + 2);
         }
     }
 }

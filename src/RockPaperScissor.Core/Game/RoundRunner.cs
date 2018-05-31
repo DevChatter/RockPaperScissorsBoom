@@ -12,8 +12,8 @@ namespace RockPaperScissor.Core.Game
 
             IBot winner = null;
             // confirm each has a valid choice
-            bool player1Invalid = IsValidDecision(p1Decision, player1);
-            bool player2Invalid = IsValidDecision(p2Decision, player2);
+            bool player1Invalid = IsInvalidDecision(p1Decision, player1);
+            bool player2Invalid = IsInvalidDecision(p2Decision, player2);
 
             if (player1Invalid || player2Invalid)
             {
@@ -72,15 +72,15 @@ namespace RockPaperScissor.Core.Game
             }
         }
 
-        private bool IsValidDecision(Decision decision, IBot bot)
+        private bool IsInvalidDecision(Decision decision, IBot bot)
         {
             if (decision == Decision.Dynamite)
             {
-                bool isAnyDynamiteRemaining = (100 - bot.DynamiteUsed) > 0;
-                return isAnyDynamiteRemaining;
+                bool outOfDynamite = (100 - bot.DynamiteUsed) <= 0;
+                return outOfDynamite;
             }
 
-            return true;
+            return false;
         }
     }
 }
