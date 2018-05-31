@@ -2,8 +2,8 @@
 {
     public enum RoundOutcome
     {
-        Loss,
-        Win,
-        Tie
+        Loss = 0,
+        Win = 1,
+        Tie = 2
     }
 }

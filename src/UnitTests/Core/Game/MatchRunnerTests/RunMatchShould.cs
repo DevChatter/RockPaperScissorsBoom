@@ -17,18 +17,31 @@ namespace UnitTests.Core.Game.MatchRunnerTests
         {
             MatchResult matchResult = _matchRunner.RunMatch(_rockOnly, _scissorsOnly);
 
-            matchResult.Winner.Should().Be(_rockOnly);
-            matchResult.Loser.Should().Be(_scissorsOnly);
+            matchResult.Player1.Should().Be(_rockOnly);
+            matchResult.Player2.Should().Be(_scissorsOnly);
+            matchResult.WinningPlayer.Should().Be(MatchOutcome.Player1);
             matchResult.RoundResults.Count.Should().Be(1000);
         }
 
         [Fact]
-        public void WorkCorrectly()
+        public void HandlePlayer2Winning()
         {
             MatchResult matchResult = _matchRunner.RunMatch(_scissorsOnly, _rockOnly);
 
-            matchResult.Winner.Should().Be(_rockOnly);
-            matchResult.Loser.Should().Be(_scissorsOnly);
+            matchResult.Player2.Should().Be(_rockOnly);
+            matchResult.Player1.Should().Be(_scissorsOnly);
+            matchResult.WinningPlayer.Should().Be(MatchOutcome.Player2);
+            matchResult.RoundResults.Count.Should().Be(1000);
+        }
+
+        [Fact]
+        public void NotSetWinnerAndLoser_GivenTie()
+        {
+            MatchResult matchResult = _matchRunner.RunMatch(_rockOnly, _rockOnly);
+
+            matchResult.Player1.Should().Be(_rockOnly);
+            matchResult.Player2.Should().Be(_rockOnly);
+            matchResult.WinningPlayer.Should().Be(MatchOutcome.Neither);
             matchResult.RoundResults.Count.Should().Be(1000);
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using Newtonsoft.Json;
 using RockPaperScissor.Core.Game;
 using RockPaperScissor.Core.Game.Bots;
@@ -22,11 +23,13 @@ namespace RockPaperScissorsBoom.Server.Bot
 
         public override Decision GetDecision(PreviousDecisionResult previousResult)
         {
-            using (var client = _httpClientFactory.CreateClient())
+            using (HttpClient client = _httpClientFactory.CreateClient())
             {
-                string rawBotChoice = client.GetStringAsync(_apiRootUrl).Result;
+                var result = client.PostAsJsonAsync(_apiRootUrl, previousResult).Result;
+                //string rawBotChoice = client.GetStringAsync(_apiRootUrl).Result;
+                string rawBotChoice = result.Content.ReadAsStringAsync().Result;
                 BotChoice botChoice = JsonConvert.DeserializeObject<BotChoice>(rawBotChoice);
-                return botChoice.Decision;
+                return botChoice?.Decision ?? throw new Exception("Didn't get BotChoice back from web api call.");
             }
         }
     }

@@ -332,3 +332,4 @@ ASALocalRun/
 src/\.vscode/
 
 \.vscode/
+*.DotSettings
