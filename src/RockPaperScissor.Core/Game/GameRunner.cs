@@ -32,15 +32,8 @@ namespace RockPaperScissor.Core.Game
 
             foreach (IBot competitor in _competitors)
             {
-                // TODO: Move the "Am I the Winner?" logic to the MatchResult
-                int wins = matchResults.Count(x =>
-                    (x.Player1 == competitor && x.WinningPlayer == MatchOutcome.Player1)
-                    || (x.Player2 == competitor && x.WinningPlayer == MatchOutcome.Player2)
-                );
-                int losses = matchResults.Count(x =>
-                    (x.Player1 == competitor && x.WinningPlayer == MatchOutcome.Player2)
-                    || (x.Player2 == competitor && x.WinningPlayer == MatchOutcome.Player1)
-                );
+                int wins = matchResults.Count(x => x.WasWonBy(competitor));
+                int losses = matchResults.Count(x => x.WasLostBy(competitor));
                 int ties = matchResults.Count(x => x.WinningPlayer == MatchOutcome.Neither); // TODO: Use this.
 
                 botRankings.Add(new BotRecord(competitor.Name, wins, losses));
