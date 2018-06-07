@@ -32,27 +32,28 @@ namespace RockPaperScissor.Core.Game
 
             foreach (IBot competitor in _competitors)
             {
-                int wins = matchResults.Count(x => x.Winner == competitor);
-                int losses = matchResults.Count(x => x.Loser == competitor);
+                int wins = matchResults.Count(x => x.WasWonBy(competitor));
+                int losses = matchResults.Count(x => x.WasLostBy(competitor));
+                int ties = matchResults.Count(x => x.WinningPlayer == MatchOutcome.Neither); // TODO: Use this.
 
                 botRankings.Add(new BotRecord(competitor.Name, wins, losses));
             }
 
-            List<FullResults> allMatchResults = Foo(matchResults);
+            List<FullResults> allMatchResults = GetFullResultsByPlayer(matchResults);
             return new GameRunnerResult { BotRecords = botRankings, AllMatchResults = allMatchResults};
         }
 
-        private static List<FullResults> Foo(List<MatchResult> matchResults)
+        private static List<FullResults> GetFullResultsByPlayer(List<MatchResult> matchResults)
         {
-            var winnerNames = matchResults.Select(x => x.Winner.Name).Distinct();
-            var loserNames = matchResults.Select(x => x.Loser.Name).Distinct();
+            var player1Names = matchResults.Select(x => x.Player1.Name).Distinct();
+            var player2Names = matchResults.Select(x => x.Player2.Name).Distinct();
 
-            var allNames = winnerNames.Union(loserNames);
+            var allNames = player1Names.Union(player2Names).ToList();
 
             List<FullResults> allMatchResults = new List<FullResults>();
             foreach (string name in allNames)
             {
-                var collection = matchResults.Where(x => x.Winner.Name == name || x.Loser.Name == name).ToList();
+                var collection = matchResults.Where(x => x.Player1.Name == name || x.Player2.Name == name).ToList();
                 allMatchResults.Add(new FullResults { BotName = name, MatchResults = collection});
             }
 

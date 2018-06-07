@@ -24,11 +24,25 @@ namespace RockPaperScissor.Core.Game
 
         private MatchResult GetMatchResultFromRoundResults(IBot player1, IBot player2, List<RoundResult> roundResults)
         {
-            var matchResult = new MatchResult();
+            var matchResult = new MatchResult
+            {
+                Player1 = player1,
+                Player2 = player2
+            };
 
             var winner = roundResults.GroupBy(x => x.Winner).OrderByDescending(x => x.Count()).Select(x => x.Key).First();
-            matchResult.Winner = winner;
-            matchResult.Loser = winner == player1 ? player2 : player1;
+            if (winner == null)
+            {
+                matchResult.WinningPlayer = MatchOutcome.Neither;
+            }
+            else if (winner == player1)
+            {
+                matchResult.WinningPlayer = MatchOutcome.Player1;
+            }
+            else
+            {
+                matchResult.WinningPlayer = MatchOutcome.Player2;
+            }
 
             matchResult.RoundResults = roundResults;
 

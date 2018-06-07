@@ -23,8 +23,9 @@
             @foreach (var matchResult in fullResults.MatchResults)
             {
                 <ul>
-                    <li>Winner: @matchResult.Winner.Name</li>
-                    <li>Loser: @matchResult.Loser.Name</li>
+                    <li>Player 1: @(matchResult.Player1.Name)</li>
+                    <li>Player 2: @matchResult.Player2.Name</li>
+                    <li>Result: @matchResult.WinningPlayer</li>
                 </ul>
             }
     </div>
