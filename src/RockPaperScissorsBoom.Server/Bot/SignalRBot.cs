@@ -18,14 +18,15 @@ namespace RockPaperScissorsBoom.Server.Bot
                 .WithUrl(apiRootUrl)
                 .Build();
             _connection.StartAsync().Wait();
-        }
 
-        public override Decision GetDecision(PreviousDecisionResult previousResult)
-        {
             _connection.On<Decision>("MakeDecision", (decision) =>
             {
                 _decision = decision;
             });
+        }
+
+        public override Decision GetDecision(PreviousDecisionResult previousResult)
+        {
 
             _connection.InvokeAsync("RequestMove", previousResult);
 
