@@ -27,6 +27,13 @@
                     <li>Player 2: @matchResult.Player2.Name</li>
                     <li>Result: @matchResult.WinningPlayer</li>
                 </ul>
+
+                @*<ul>
+                @foreach (var roundResult in matchResult.RoundResults)
+                 {
+                     <li>@roundResult.Player1Played - @roundResult.Player2Played = @roundResult.Winner?.Name</li>
+                 }
+                </ul>*@
             }
     </div>
 }
