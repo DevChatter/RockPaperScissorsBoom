@@ -23,7 +23,7 @@ namespace RockPaperScissorsBoom.Server.Pages
             var gameRunner = new GameRunner();
 
             gameRunner.AddBot(new RockOnlyBot("Rocky"));
-            gameRunner.AddBot(new PaperOnlyBot("Paper"));
+            gameRunner.AddBot(new PaperOnlyBot("Treebeard"));
             gameRunner.AddBot(new ScissorsOnlyBot("Sharpy"));
             gameRunner.AddBot(new WaterOnlyBot("All Washed Up"));
             gameRunner.AddBot(new CleverBot());
