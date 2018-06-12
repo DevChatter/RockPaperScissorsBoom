@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RockPaperScissorsBoom.ExampleBot.Hubs;
 
 namespace RockPaperScissorsBoom.ExampleBot
 {
@@ -28,6 +29,8 @@ namespace RockPaperScissorsBoom.ExampleBot
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +48,11 @@ namespace RockPaperScissorsBoom.ExampleBot
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseSignalR(builder =>
+            {
+                builder.MapHub<DecisionHub>("/decision");
+            });
 
             app.UseMvc();
         }
