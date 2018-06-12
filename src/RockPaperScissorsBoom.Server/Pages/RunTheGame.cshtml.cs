@@ -27,6 +27,7 @@ namespace RockPaperScissorsBoom.Server.Pages
             gameRunner.AddBot(new ScissorsOnlyBot("Sharpy"));
             gameRunner.AddBot(new WaterOnlyBot("All Washed Up"));
             gameRunner.AddBot(new CleverBot());
+            gameRunner.AddBot(new SmartBot());
 
             gameRunner.AddBot(new SignalRBot("Signals Are Wise", "https://localhost:44347/decision"));
 
