@@ -8,11 +8,6 @@ namespace RockPaperScissor.Core.Game.Bots
     {
         private readonly Dictionary<Guid,int> _usedDynamite = new Dictionary<Guid, int>();
 
-        public SmartBot()
-        {
-            Name = "Smart Bot";
-        }
-
         public override Decision GetDecision(PreviousDecisionResult previousResult)
         {
             Decision decision = GetDecisionThatBeats(previousResult.OpponentPrevious);

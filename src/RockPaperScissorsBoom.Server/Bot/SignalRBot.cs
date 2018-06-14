@@ -9,16 +9,6 @@ namespace RockPaperScissorsBoom.Server.Bot
     {
         private HubConnection _connection;
         private Decision? _decision = null;
-        public SignalRBot()
-        {
-
-        }
-
-        public SignalRBot(string name, string apiRootUrl)
-        {
-            Name = name;
-            ApiRootUrl = apiRootUrl;
-        }
 
         public string ApiRootUrl { get; set; }
 

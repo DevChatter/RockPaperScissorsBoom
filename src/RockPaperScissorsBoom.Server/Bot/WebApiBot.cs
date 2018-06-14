@@ -14,10 +14,9 @@ namespace RockPaperScissorsBoom.Server.Bot
 
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public WebApiBot(string name, string apiRootUrl, IHttpClientFactory httpClientFactory)
+        public WebApiBot(string apiRootUrl, IHttpClientFactory httpClientFactory)
         {
             _apiRootUrl = apiRootUrl;
-            Name = name;
             _httpClientFactory = httpClientFactory;
         }
 

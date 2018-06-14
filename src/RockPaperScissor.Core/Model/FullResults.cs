@@ -6,8 +6,7 @@ namespace RockPaperScissor.Core.Model
 {
     public class FullResults
     {
-        public Guid BotId { get; set; }
-        public string BotName { get; set; }
+        public Competitor Competitor { get; set; }
         public List<MatchResult> MatchResults { get; set; }
     }
 }

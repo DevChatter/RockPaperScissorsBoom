@@ -4,10 +4,6 @@ namespace RockPaperScissor.Core.Game.Bots
 {
     public class CleverBot : BaseBot
     {
-        public CleverBot()
-        {
-            Name = "Clever Bot";
-        }
         public override Decision GetDecision(PreviousDecisionResult previousResult)
         {
             return GetDecisionThatBeats(previousResult.OpponentPrevious);

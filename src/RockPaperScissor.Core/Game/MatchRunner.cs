@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RockPaperScissor.Core.Game.Bots;
 using RockPaperScissor.Core.Game.Results;
+using RockPaperScissor.Core.Model;
 
 namespace RockPaperScissor.Core.Game
 {
     public class MatchRunner
     {
-        public MatchResult RunMatch(IBot player1, IBot player2)
+        public MatchResult RunMatch(BaseBot player1, BaseBot player2)
         {
             var roundResults = new List<RoundResult>();
             var roundRunner = new RoundRunner();
@@ -23,12 +25,12 @@ namespace RockPaperScissor.Core.Game
             return GetMatchResultFromRoundResults(player1, player2, roundResults);
         }
 
-        private MatchResult GetMatchResultFromRoundResults(IBot player1, IBot player2, List<RoundResult> roundResults)
+        private MatchResult GetMatchResultFromRoundResults(BaseBot player1, BaseBot player2, List<RoundResult> roundResults)
         {
             var matchResult = new MatchResult
             {
-                Player1Id = player1.Id,
-                Player2Id = player2.Id
+                Player1 = player1.Competitor,
+                Player2 = player2.Competitor
             };
 
             var winner = roundResults.GroupBy(x => x.Winner).OrderByDescending(x => x.Count()).Select(x => x.Key).First();

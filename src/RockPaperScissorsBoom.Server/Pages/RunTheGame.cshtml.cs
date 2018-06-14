@@ -43,13 +43,13 @@ namespace RockPaperScissorsBoom.Server.Pages
                     signalRBot.ApiRootUrl = competitor.Url;
                 }
 
-                bot.Name = competitor.Name;
+                bot.Competitor = competitor;
                 gameRunner.AddBot(bot);
             }
 
             GameRunnerResult gameRunnerResult = gameRunner.StartAllMatches();
             BotRankings = gameRunnerResult.BotRecords.OrderByDescending(x => x.Wins).ToList();
-            AllFullResults = gameRunnerResult.AllMatchResults.OrderBy(x => x.BotId).ToList();
+            AllFullResults = gameRunnerResult.AllMatchResults.OrderBy(x => x.Competitor.Name).ToList();
         }
 
         private static List<Competitor> GetDefaultCompetitors()
