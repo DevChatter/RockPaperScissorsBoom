@@ -9,16 +9,16 @@ namespace UnitTests.Core.Game.MatchRunnerTests
     public class RunMatchShould
     {
         private readonly MatchRunner _matchRunner = new MatchRunner();
-        private readonly IBot _rockOnly = new RockOnlyBot("The Rock");
-        private readonly IBot _scissorsOnly = new ScissorsOnlyBot("Fulcrum Master");
+        private readonly IBot _rockOnly = new RockOnlyBot();
+        private readonly IBot _scissorsOnly = new ScissorsOnlyBot();
 
         [Fact]
         public void ReturnSimpleMatchResult_GivenStaticBots()
         {
             MatchResult matchResult = _matchRunner.RunMatch(_rockOnly, _scissorsOnly);
 
-            matchResult.Player1.Should().Be(_rockOnly);
-            matchResult.Player2.Should().Be(_scissorsOnly);
+            matchResult.Player1Id.Should().Be(_rockOnly.Id);
+            matchResult.Player2Id.Should().Be(_scissorsOnly.Id);
             matchResult.WinningPlayer.Should().Be(MatchOutcome.Player1);
             matchResult.RoundResults.Count.Should().Be(1000);
         }
@@ -28,8 +28,8 @@ namespace UnitTests.Core.Game.MatchRunnerTests
         {
             MatchResult matchResult = _matchRunner.RunMatch(_scissorsOnly, _rockOnly);
 
-            matchResult.Player2.Should().Be(_rockOnly);
-            matchResult.Player1.Should().Be(_scissorsOnly);
+            matchResult.Player2Id.Should().Be(_rockOnly.Id);
+            matchResult.Player1Id.Should().Be(_scissorsOnly.Id);
             matchResult.WinningPlayer.Should().Be(MatchOutcome.Player2);
             matchResult.RoundResults.Count.Should().Be(1000);
         }
@@ -39,8 +39,8 @@ namespace UnitTests.Core.Game.MatchRunnerTests
         {
             MatchResult matchResult = _matchRunner.RunMatch(_rockOnly, _rockOnly);
 
-            matchResult.Player1.Should().Be(_rockOnly);
-            matchResult.Player2.Should().Be(_rockOnly);
+            matchResult.Player1Id.Should().Be(_rockOnly.Id);
+            matchResult.Player2Id.Should().Be(_rockOnly.Id);
             matchResult.WinningPlayer.Should().Be(MatchOutcome.Neither);
             matchResult.RoundResults.Count.Should().Be(1000);
         }

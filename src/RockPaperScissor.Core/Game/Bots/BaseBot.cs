@@ -6,8 +6,8 @@ namespace RockPaperScissor.Core.Game.Bots
 {
     public abstract class BaseBot : IBot
     {
-
-        public string Name { get; protected set; }
+        public Guid Id { get; protected set; } = Guid.NewGuid();
+        public string Name { get; set; }
         public int DynamiteUsed { get; private set; }
         public void UseDynamite() => DynamiteUsed++;
         public abstract Decision GetDecision(PreviousDecisionResult previousResult);

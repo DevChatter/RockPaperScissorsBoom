@@ -19,12 +19,12 @@
 @foreach (var fullResults in Model.AllFullResults)
 {
     <div>
-        <h4>Results for @fullResults.BotName</h4>
+        <h4>Results for @fullResults.BotId</h4>
             @foreach (var matchResult in fullResults.MatchResults)
             {
                 <ul>
-                    <li>Player 1: @(matchResult.Player1.Name)</li>
-                    <li>Player 2: @matchResult.Player2.Name</li>
+                    <li>Player 1: @(matchResult.Player1Id)</li>
+                    <li>Player 2: @matchResult.Player2Id</li>
                     <li>Result: @matchResult.WinningPlayer</li>
                 </ul>
 

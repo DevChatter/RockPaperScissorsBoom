@@ -27,8 +27,8 @@ namespace RockPaperScissor.Core.Game
         {
             var matchResult = new MatchResult
             {
-                Player1 = player1,
-                Player2 = player2
+                Player1Id = player1.Id,
+                Player2Id = player2.Id
             };
 
             var winner = roundResults.GroupBy(x => x.Winner).OrderByDescending(x => x.Count()).Select(x => x.Key).First();

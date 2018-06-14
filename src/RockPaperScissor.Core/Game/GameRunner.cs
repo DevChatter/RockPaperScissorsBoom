@@ -1,4 +1,5 @@
-﻿using RockPaperScissor.Core.Game.Results;
+﻿using System;
+using RockPaperScissor.Core.Game.Results;
 using RockPaperScissor.Core.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,8 @@ namespace RockPaperScissor.Core.Game
 
             foreach (IBot competitor in _competitors)
             {
-                int wins = matchResults.Count(x => x.WasWonBy(competitor));
-                int losses = matchResults.Count(x => x.WasLostBy(competitor));
+                int wins = matchResults.Count(x => x.WasWonBy(competitor.Id));
+                int losses = matchResults.Count(x => x.WasLostBy(competitor.Id));
                 int ties = matchResults.Count(x => x.WinningPlayer == MatchOutcome.Neither); // TODO: Use this.
 
                 botRankings.Add(new BotRecord(competitor.Name, wins, losses));
@@ -45,16 +46,16 @@ namespace RockPaperScissor.Core.Game
 
         private static List<FullResults> GetFullResultsByPlayer(List<MatchResult> matchResults)
         {
-            var player1Names = matchResults.Select(x => x.Player1.Name).Distinct();
-            var player2Names = matchResults.Select(x => x.Player2.Name).Distinct();
+            var player1Ids = matchResults.Select(x => x.Player1Id).Distinct();
+            var player2Ids = matchResults.Select(x => x.Player2Id).Distinct();
 
-            var allNames = player1Names.Union(player2Names).ToList();
+            var allIds = player1Ids.Union(player2Ids).ToList();
 
             List<FullResults> allMatchResults = new List<FullResults>();
-            foreach (string name in allNames)
+            foreach (Guid id in allIds)
             {
-                var collection = matchResults.Where(x => x.Player1.Name == name || x.Player2.Name == name).ToList();
-                allMatchResults.Add(new FullResults { BotName = name, MatchResults = collection});
+                var collection = matchResults.Where(x => x.Player1Id == id || x.Player2Id == id).ToList();
+                allMatchResults.Add(new FullResults { BotId = id, MatchResults = collection});
             }
 
             return allMatchResults;

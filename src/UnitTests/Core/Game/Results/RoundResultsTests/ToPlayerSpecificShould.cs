@@ -8,8 +8,8 @@ namespace UnitTests.Core.Game.Results.RoundResultsTests
 {
     public class ToPlayerSpecificShould
     {
-        private readonly DynamiteOnlyBot _player1 = new DynamiteOnlyBot("More Boomy");
-        private readonly DynamiteOnlyBot _player2 = new DynamiteOnlyBot("Less Boomy");
+        private readonly DynamiteOnlyBot _player1 = new DynamiteOnlyBot();
+        private readonly DynamiteOnlyBot _player2 = new DynamiteOnlyBot();
 
         [Fact]
         public void AssignWinner_GivenWinnerAsPlayer()

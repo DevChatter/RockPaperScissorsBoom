@@ -1,4 +1,5 @@
-﻿using RockPaperScissor.Core.Game;
+﻿using System;
+using RockPaperScissor.Core.Game;
 using RockPaperScissor.Core.Game.Results;
 
 namespace UnitTests.Fakes
@@ -12,6 +13,7 @@ namespace UnitTests.Fakes
             _decision = decision;
         }
 
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public int DynamiteUsed { get; set; }
         public Decision GetDecision(PreviousDecisionResult previousResult)

@@ -22,7 +22,7 @@ namespace UnitTests.Core.Game.GameRunnerTests
         public void ReturnOneBot_GivenOneBotCompeting()
         {
             var gameRunner = new GameRunner();
-            gameRunner.AddBot(new RockOnlyBot("Rocky"));
+            gameRunner.AddBot(new RockOnlyBot());
 
             var result = gameRunner.StartAllMatches();
 
