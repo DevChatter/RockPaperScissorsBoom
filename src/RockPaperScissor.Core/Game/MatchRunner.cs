@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RockPaperScissor.Core.Game.Results;
 
@@ -11,7 +12,7 @@ namespace RockPaperScissor.Core.Game
             var roundResults = new List<RoundResult>();
             var roundRunner = new RoundRunner();
 
-            RoundResult previousResult = new RoundResult();
+            RoundResult previousResult = new RoundResult {MatchId = Guid.NewGuid()};
 
             for (int i = 0; i < 1000; i++)
             {

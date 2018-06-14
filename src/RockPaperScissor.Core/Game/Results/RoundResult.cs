@@ -1,7 +1,10 @@
-﻿namespace RockPaperScissor.Core.Game.Results
+﻿using System;
+
+namespace RockPaperScissor.Core.Game.Results
 {
     public class RoundResult
     {
+        public Guid MatchId { get; set; }
         public IBot Winner { get; set; }
         public IBot Player1 { get; set; }
         public IBot Player2 { get; set; }
@@ -10,7 +13,7 @@
 
         public PreviousDecisionResult ToPlayerSpecific(IBot bot)
         {
-            var result = new PreviousDecisionResult();
+            var result = new PreviousDecisionResult { MatchId = MatchId };
 
             if (Winner == null)
             {
