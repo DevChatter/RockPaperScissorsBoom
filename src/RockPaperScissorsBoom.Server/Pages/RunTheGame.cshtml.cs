@@ -13,12 +13,10 @@ namespace RockPaperScissorsBoom.Server.Pages
 {
     public class RunTheGameModel : PageModel
     {
-        private readonly IHttpClientFactory _httpClientFactory;
         private readonly ApplicationDbContext _db;
 
-        public RunTheGameModel(IHttpClientFactory httpClientFactory, ApplicationDbContext db)
+        public RunTheGameModel(ApplicationDbContext db)
         {
-            _httpClientFactory = httpClientFactory;
             _db = db;
         }
 
@@ -35,21 +33,26 @@ namespace RockPaperScissorsBoom.Server.Pages
             var gameRunner = new GameRunner();
             foreach (var competitor in competitors)
             {
-                string competitorBotType = competitor.BotType;
-                Type type = Type.GetType(competitorBotType);
-                var bot = (BaseBot)Activator.CreateInstance(type);
-                if (bot is SignalRBot signalRBot)
-                {
-                    signalRBot.ApiRootUrl = competitor.Url;
-                }
-
-                bot.Competitor = competitor;
+                BaseBot bot = CreateBotFromCompetitor(competitor);
                 gameRunner.AddBot(bot);
             }
 
             GameRunnerResult gameRunnerResult = gameRunner.StartAllMatches();
             BotRankings = gameRunnerResult.BotRecords.OrderByDescending(x => x.Wins).ToList();
             AllFullResults = gameRunnerResult.AllMatchResults.OrderBy(x => x.Competitor.Name).ToList();
+        }
+
+        private static BaseBot CreateBotFromCompetitor(Competitor competitor)
+        {
+            Type type = Type.GetType(competitor.BotType);
+            var bot = (BaseBot) Activator.CreateInstance(type);
+            if (bot is SignalRBot signalRBot)
+            {
+                signalRBot.ApiRootUrl = competitor.Url;
+            }
+
+            bot.Competitor = competitor;
+            return bot;
         }
 
         private static List<Competitor> GetDefaultCompetitors()
