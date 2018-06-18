@@ -8,7 +8,7 @@
 <h2>Bot Results</h2>
 
 <ol>
-    @foreach(var botRank in Model.BotRankings)
+    @foreach(var botRank in Model.BotRankings.OrderByDescending(x => x.Wins))
     {
         <li>@botRank.Competitor.Name: @botRank.Wins-@botRank.Losses-@botRank.Ties</li>
     }

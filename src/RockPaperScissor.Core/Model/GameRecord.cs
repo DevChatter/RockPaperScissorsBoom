@@ -5,7 +5,7 @@ namespace RockPaperScissor.Core.Model
 {
     public class GameRecord : BaseEntity
     {
-        public DateTime GameDate { get; set; }
+        public DateTime GameDate { get; set; } = DateTime.UtcNow;
         public List<BotRecord> BotRecords { get; set; }
     }
 }

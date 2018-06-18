@@ -24,8 +24,11 @@ namespace RockPaperScissorsBoom.Server.Pages
 
         public void OnGet()
         {
-            GameRecord gameRecord = _db.GameRecords.Include(x => x.BotRecords)
-                .OrderByDescending(x => x.GameDate).FirstOrDefault();
+            GameRecord gameRecord = _db.GameRecords
+                .Include(x => x.BotRecords)
+                .ThenInclude(x => x.Competitor)
+                .OrderByDescending(x => x.GameDate)
+                .FirstOrDefault();
             BotRankings = gameRecord?.BotRecords ?? new List<BotRecord>();
             AllFullResults = new List<FullResults>();
         }
@@ -48,8 +51,19 @@ namespace RockPaperScissorsBoom.Server.Pages
             }
 
             GameRunnerResult gameRunnerResult = gameRunner.StartAllMatches();
+            SaveResults(gameRunnerResult);
             BotRankings = gameRunnerResult.BotRecords.OrderByDescending(x => x.Wins).ToList();
             AllFullResults = gameRunnerResult.AllMatchResults.OrderBy(x => x.Competitor.Name).ToList();
+        }
+
+        private void SaveResults(GameRunnerResult gameRunnerResult)
+        {
+            if (gameRunnerResult.BotRecords.Any())
+            {
+                _db.GameRecords.Add(gameRunnerResult.BotRecords.First().GameRecord);
+                _db.BotRecords.AddRange(gameRunnerResult.BotRecords);
+                _db.SaveChanges();
+            }
         }
 
         private static BaseBot CreateBotFromCompetitor(Competitor competitor)
