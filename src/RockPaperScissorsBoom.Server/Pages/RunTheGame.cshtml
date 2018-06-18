@@ -10,7 +10,7 @@
 <ol>
     @foreach(var botRank in Model.BotRankings)
     {
-        <li>@botRank.BotName: @botRank.Wins-@botRank.Losses-@botRank.Ties</li>
+        <li>@botRank.Competitor.Name: @botRank.Wins-@botRank.Losses-@botRank.Ties</li>
     }
 </ol>
 
