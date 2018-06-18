@@ -38,7 +38,7 @@ namespace RockPaperScissor.Core.Game
                 int losses = matchResults.Count(x => x.WasLostBy(bot.Id));
                 int ties = matchResults.Count(x => x.WinningPlayer == MatchOutcome.Neither); // TODO: Use this.
 
-                botRankings.Add(new BotRecord(bot.Competitor, wins, losses, ties));
+                botRankings.Add(new BotRecord{ Competitor = bot.Competitor, Wins = wins, Losses = losses, Ties = ties});
             }
 
             List<FullResults> allMatchResults = GetFullResultsByPlayer(matchResults);
