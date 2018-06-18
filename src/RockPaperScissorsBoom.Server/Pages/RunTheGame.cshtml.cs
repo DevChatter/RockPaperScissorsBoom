@@ -7,12 +7,15 @@ using RockPaperScissorsBoom.Server.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace RockPaperScissorsBoom.Server.Pages
 {
     public class RunTheGameModel : PageModel
     {
         private readonly ApplicationDbContext _db;
+        public List<BotRecord> BotRankings { get; set; }
+        public List<FullResults> AllFullResults { get; set; }
 
         public RunTheGameModel(ApplicationDbContext db)
         {
@@ -20,6 +23,14 @@ namespace RockPaperScissorsBoom.Server.Pages
         }
 
         public void OnGet()
+        {
+            GameRecord gameRecord = _db.GameRecords.Include(x => x.BotRecords)
+                .OrderByDescending(x => x.GameDate).FirstOrDefault();
+            BotRankings = gameRecord?.BotRecords ?? new List<BotRecord>();
+            AllFullResults = new List<FullResults>();
+        }
+
+        public void OnPost()
         {
             List<Competitor> competitors = _db.Competitors.ToList();
             if (!competitors.Any())
@@ -75,7 +86,5 @@ namespace RockPaperScissorsBoom.Server.Pages
             return competitors;
         }
 
-        public List<BotRecord> BotRankings { get; set; }
-        public List<FullResults> AllFullResults { get; set; }
     }
 }
