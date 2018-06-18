@@ -32,13 +32,22 @@ namespace RockPaperScissor.Core.Game
         {
             var botRankings = new List<BotRecord>();
 
+            var gameRecord = new GameRecord();
+
             foreach (BaseBot bot in _competitors)
             {
                 int wins = matchResults.Count(x => x.WasWonBy(bot.Id));
                 int losses = matchResults.Count(x => x.WasLostBy(bot.Id));
                 int ties = matchResults.Count(x => x.WinningPlayer == MatchOutcome.Neither); // TODO: Use this.
 
-                botRankings.Add(new BotRecord{ Competitor = bot.Competitor, Wins = wins, Losses = losses, Ties = ties});
+                botRankings.Add(new BotRecord
+                {
+                    GameRecord = gameRecord,
+                    Competitor = bot.Competitor,
+                    Wins = wins,
+                    Losses = losses,
+                    Ties = ties
+                });
             }
 
             List<FullResults> allMatchResults = GetFullResultsByPlayer(matchResults);
