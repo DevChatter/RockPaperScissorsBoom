@@ -48,7 +48,7 @@ namespace RockPaperScissor.Core.Game
 
             var roundResult = new RoundResult
             {
-                MatchId = previousResult.MatchId,
+                MatchResult = previousResult.MatchResult,
                 Winner = winner,
                 Player1 = player1,
                 Player2 = player2,

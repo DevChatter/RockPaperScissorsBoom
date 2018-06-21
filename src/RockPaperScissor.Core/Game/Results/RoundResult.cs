@@ -1,10 +1,11 @@
 ﻿using System;
+using RockPaperScissor.Core.Model;
 
 namespace RockPaperScissor.Core.Game.Results
 {
-    public class RoundResult
+    public class RoundResult : BaseEntity
     {
-        public Guid MatchId { get; set; }
+        public MatchResult MatchResult { get; set; }
         public IBot Winner { get; set; }
         public IBot Player1 { get; set; }
         public IBot Player2 { get; set; }
@@ -13,7 +14,7 @@ namespace RockPaperScissor.Core.Game.Results
 
         public PreviousDecisionResult ToPlayerSpecific(IBot bot)
         {
-            var result = new PreviousDecisionResult { MatchId = MatchId };
+            var result = new PreviousDecisionResult { MatchId = MatchResult.Id };
 
             if (Winner == null)
             {
