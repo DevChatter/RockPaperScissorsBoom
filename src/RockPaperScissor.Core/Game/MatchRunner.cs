@@ -36,7 +36,7 @@ namespace RockPaperScissor.Core.Game
             {
                 matchResult.WinningPlayer = MatchOutcome.Neither;
             }
-            else if (winner == player1)
+            else if (Equals(winner, player1.Competitor))
             {
                 matchResult.WinningPlayer = MatchOutcome.Player1;
             }

@@ -5,7 +5,7 @@ using RockPaperScissor.Core.Model;
 
 namespace RockPaperScissor.Core.Game.Bots
 {
-    public abstract class BaseBot : IBot
+    public abstract class BaseBot
     {
         public Competitor Competitor { get; set; }
         public Guid Id => Competitor.Id;

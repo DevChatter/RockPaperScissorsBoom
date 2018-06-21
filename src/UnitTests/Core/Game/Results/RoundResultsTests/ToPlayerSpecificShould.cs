@@ -1,20 +1,21 @@
 ﻿using FluentAssertions;
 using RockPaperScissor.Core.Game;
-using RockPaperScissor.Core.Game.Bots;
 using RockPaperScissor.Core.Game.Results;
+using RockPaperScissor.Core.Model;
 using Xunit;
+using DynoBot = RockPaperScissor.Core.Game.Bots.DynamiteOnlyBot;
 
 namespace UnitTests.Core.Game.Results.RoundResultsTests
 {
     public class ToPlayerSpecificShould
     {
-        private readonly DynamiteOnlyBot _player1 = new DynamiteOnlyBot();
-        private readonly DynamiteOnlyBot _player2 = new DynamiteOnlyBot();
+        private readonly DynoBot _player1 = new DynoBot { Competitor = new Competitor()};
+        private readonly DynoBot _player2 = new DynoBot { Competitor = new Competitor()};
 
         [Fact]
         public void AssignWinner_GivenWinnerAsPlayer()
         {
-            var roundResult = new RoundResult{Winner = _player1 };
+            var roundResult = new RoundResult{Winner = _player1.Competitor };
 
             var playerSpecific = roundResult.ToPlayerSpecific(_player1);
 
@@ -24,7 +25,7 @@ namespace UnitTests.Core.Game.Results.RoundResultsTests
         [Fact]
         public void AssignLoser_GivenLoserAsPlayer()
         {
-            var roundResult = new RoundResult{Winner = _player1 };
+            var roundResult = new RoundResult{Winner = _player1.Competitor };
 
             var playerSpecific = roundResult.ToPlayerSpecific(_player2);
 
@@ -46,9 +47,9 @@ namespace UnitTests.Core.Game.Results.RoundResultsTests
         {
             var roundResult = new RoundResult
             {
-                Winner = _player1,
-                Player1 = _player1,
-                Player2 = _player2,
+                Winner = _player1.Competitor,
+                Player1 = _player1.Competitor,
+                Player2 = _player2.Competitor,
                 Player1Played = Decision.Dynamite,
                 Player2Played = Decision.Paper,
             };
