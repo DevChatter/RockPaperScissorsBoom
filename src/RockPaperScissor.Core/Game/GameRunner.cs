@@ -1,13 +1,15 @@
-﻿using RockPaperScissor.Core.Game.Results;
+﻿using System;
+using RockPaperScissor.Core.Game.Results;
 using RockPaperScissor.Core.Model;
 using System.Collections.Generic;
 using System.Linq;
+using RockPaperScissor.Core.Game.Bots;
 
 namespace RockPaperScissor.Core.Game
 {
     public class GameRunner
     {
-        private readonly List<IBot> _competitors = new List<IBot>();
+        private readonly List<BaseBot> _competitors = new List<BaseBot>();
 
         public GameRunnerResult StartAllMatches()
         {
@@ -30,13 +32,22 @@ namespace RockPaperScissor.Core.Game
         {
             var botRankings = new List<BotRecord>();
 
-            foreach (IBot competitor in _competitors)
+            var gameRecord = new GameRecord();
+
+            foreach (BaseBot bot in _competitors)
             {
-                int wins = matchResults.Count(x => x.WasWonBy(competitor));
-                int losses = matchResults.Count(x => x.WasLostBy(competitor));
+                int wins = matchResults.Count(x => x.WasWonBy(bot.Id));
+                int losses = matchResults.Count(x => x.WasLostBy(bot.Id));
                 int ties = matchResults.Count(x => x.WinningPlayer == MatchOutcome.Neither); // TODO: Use this.
 
-                botRankings.Add(new BotRecord(competitor.Name, wins, losses));
+                botRankings.Add(new BotRecord
+                {
+                    GameRecord = gameRecord,
+                    Competitor = bot.Competitor,
+                    Wins = wins,
+                    Losses = losses,
+                    Ties = ties
+                });
             }
 
             List<FullResults> allMatchResults = GetFullResultsByPlayer(matchResults);
@@ -45,22 +56,22 @@ namespace RockPaperScissor.Core.Game
 
         private static List<FullResults> GetFullResultsByPlayer(List<MatchResult> matchResults)
         {
-            var player1Names = matchResults.Select(x => x.Player1.Name).Distinct();
-            var player2Names = matchResults.Select(x => x.Player2.Name).Distinct();
+            var player1s = matchResults.Select(x => x.Player1).Distinct();
+            var player2s = matchResults.Select(x => x.Player2).Distinct();
 
-            var allNames = player1Names.Union(player2Names).ToList();
+            var competitors = player1s.Union(player2s).ToList();
 
             List<FullResults> allMatchResults = new List<FullResults>();
-            foreach (string name in allNames)
+            foreach (Competitor competitor in competitors)
             {
-                var collection = matchResults.Where(x => x.Player1.Name == name || x.Player2.Name == name).ToList();
-                allMatchResults.Add(new FullResults { BotName = name, MatchResults = collection});
+                var collection = matchResults.Where(x => x.Player1 == competitor || x.Player2 == competitor).ToList();
+                allMatchResults.Add(new FullResults { Competitor = competitor, MatchResults = collection});
             }
 
             return allMatchResults;
         }
 
-        public void AddBot(IBot bot)
+        public void AddBot(BaseBot bot)
         {
             _competitors.Add(bot);
         }

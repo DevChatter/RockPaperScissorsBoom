@@ -6,10 +6,6 @@ namespace RockPaperScissor.Core.Game.Bots
 {
     public class RandomBot : BaseBot
     {
-        public RandomBot()
-        {
-            Name = "Rando Carissian";
-        }
         public override Decision GetDecision(PreviousDecisionResult previousResult)
         {
             var decisions = new List<Decision> {

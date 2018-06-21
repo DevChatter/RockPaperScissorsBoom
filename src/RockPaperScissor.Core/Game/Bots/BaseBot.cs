@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using RockPaperScissor.Core.Game.Results;
+using RockPaperScissor.Core.Model;
 
 namespace RockPaperScissor.Core.Game.Bots
 {
     public abstract class BaseBot : IBot
     {
+        public Competitor Competitor { get; set; }
+        public Guid Id => Competitor.Id;
 
-        public string Name { get; protected set; }
+        public string Name => Competitor.Name;
         public int DynamiteUsed { get; private set; }
         public void UseDynamite() => DynamiteUsed++;
         public abstract Decision GetDecision(PreviousDecisionResult previousResult);

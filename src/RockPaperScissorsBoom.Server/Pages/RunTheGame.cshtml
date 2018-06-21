@@ -8,18 +8,22 @@
 <h2>Bot Results</h2>
 
 <ol>
-    @foreach(var botRank in Model.BotRankings)
+    @foreach(var botRank in Model.BotRankings.OrderByDescending(x => x.Wins))
     {
-        <li>@botRank.BotName: @botRank.Wins-@botRank.Losses</li>
+        <li>@botRank.Competitor.Name: @botRank.Wins-@botRank.Losses-@botRank.Ties</li>
     }
 </ol>
+
+<form method="post" asp-page="RunTheGame">
+    <input type="submit" value="Run The Game Again"/>
+</form>
 
 <h3>Full Game Results</h3>
 
 @foreach (var fullResults in Model.AllFullResults)
 {
     <div>
-        <h4>Results for @fullResults.BotName</h4>
+        <h4>Results for @fullResults.Competitor.Name (@fullResults.Competitor.Id)</h4>
             @foreach (var matchResult in fullResults.MatchResults)
             {
                 <ul>

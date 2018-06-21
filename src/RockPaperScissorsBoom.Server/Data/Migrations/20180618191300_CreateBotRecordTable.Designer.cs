@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RockPaperScissorsBoom.Server.Data;
 
 namespace RockPaperScissorsBoom.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180618191300_CreateBotRecordTable")]
+    partial class CreateBotRecordTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,8 +193,6 @@ namespace RockPaperScissorsBoom.Server.Data.Migrations
 
                     b.Property<Guid?>("CompetitorId");
 
-                    b.Property<Guid?>("GameRecordId");
-
                     b.Property<int>("Losses");
 
                     b.Property<int>("Ties");
@@ -202,8 +202,6 @@ namespace RockPaperScissorsBoom.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompetitorId");
-
-                    b.HasIndex("GameRecordId");
 
                     b.ToTable("BotRecords");
                 });
@@ -222,18 +220,6 @@ namespace RockPaperScissorsBoom.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Competitors");
-                });
-
-            modelBuilder.Entity("RockPaperScissor.Core.Model.GameRecord", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("GameDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GameRecords");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -286,10 +272,6 @@ namespace RockPaperScissorsBoom.Server.Data.Migrations
                     b.HasOne("RockPaperScissor.Core.Model.Competitor", "Competitor")
                         .WithMany()
                         .HasForeignKey("CompetitorId");
-
-                    b.HasOne("RockPaperScissor.Core.Model.GameRecord", "GameRecord")
-                        .WithMany()
-                        .HasForeignKey("GameRecordId");
                 });
 #pragma warning restore 612, 618
         }

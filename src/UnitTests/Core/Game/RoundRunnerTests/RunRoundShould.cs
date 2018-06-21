@@ -9,11 +9,11 @@ namespace UnitTests.Core.Game.RoundRunnerTests
 {
     public class RunRoundShould
     {
-        private readonly RockOnlyBot _rockOnlyBot = new RockOnlyBot("Rocky");
-        private readonly PaperOnlyBot _paperOnlyBot = new PaperOnlyBot("Paper");
-        private readonly WaterOnlyBot _waterOnlyBot = new WaterOnlyBot("Water");
-        private readonly DynamiteOnlyBot _dynamiteOnlyBot = new DynamiteOnlyBot("Dyna");
-        private readonly ScissorsOnlyBot _scissorsOnlyBot = new ScissorsOnlyBot("Cutter");
+        private readonly RockOnlyBot _rockOnlyBot = new RockOnlyBot();
+        private readonly PaperOnlyBot _paperOnlyBot = new PaperOnlyBot();
+        private readonly WaterOnlyBot _waterOnlyBot = new WaterOnlyBot();
+        private readonly DynamiteOnlyBot _dynamiteOnlyBot = new DynamiteOnlyBot();
+        private readonly ScissorsOnlyBot _scissorsOnlyBot = new ScissorsOnlyBot();
         private readonly RoundRunner _roundRunner = new RoundRunner();
 
         [Fact]

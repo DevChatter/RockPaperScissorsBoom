@@ -1,16 +1,11 @@
 ﻿namespace RockPaperScissor.Core.Model
 {
-    public class BotRecord
+    public class BotRecord : BaseEntity
     {
-        public BotRecord(string botName, int wins, int losses)
-        {
-            BotName = botName;
-            Wins = wins;
-            Losses = losses;
-        }
-
-        public string BotName { get; set; }
+        public GameRecord GameRecord { get; set; }
+        public Competitor Competitor { get; set; }
         public int Wins { get; set; }
         public int Losses { get; set; }
+        public int Ties { get; set; }
     }
 }
