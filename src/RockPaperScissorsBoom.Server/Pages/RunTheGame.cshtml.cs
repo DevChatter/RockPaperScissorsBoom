@@ -52,16 +52,15 @@ namespace RockPaperScissorsBoom.Server.Pages
 
             GameRunnerResult gameRunnerResult = gameRunner.StartAllMatches();
             SaveResults(gameRunnerResult);
-            BotRankings = gameRunnerResult.BotRecords.OrderByDescending(x => x.Wins).ToList();
+            BotRankings = gameRunnerResult.GameRecord.BotRecords.OrderByDescending(x => x.Wins).ToList();
             AllFullResults = gameRunnerResult.AllMatchResults.OrderBy(x => x.Competitor.Name).ToList();
         }
 
         private void SaveResults(GameRunnerResult gameRunnerResult)
         {
-            if (gameRunnerResult.BotRecords.Any())
+            if (gameRunnerResult.GameRecord.BotRecords.Any())
             {
-                _db.GameRecords.Add(gameRunnerResult.BotRecords.First().GameRecord);
-                _db.BotRecords.AddRange(gameRunnerResult.BotRecords);
+                _db.GameRecords.Add(gameRunnerResult.GameRecord);
                 _db.SaveChanges();
             }
         }

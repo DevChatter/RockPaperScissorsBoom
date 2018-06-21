@@ -30,17 +30,15 @@ namespace RockPaperScissor.Core.Game
 
         public GameRunnerResult GetBotRankingsFromMatchResults(List<MatchResult> matchResults)
         {
-            var botRankings = new List<BotRecord>();
-
             var gameRecord = new GameRecord();
 
             foreach (BaseBot bot in _competitors)
             {
                 int wins = matchResults.Count(x => x.WasWonBy(bot.Id));
                 int losses = matchResults.Count(x => x.WasLostBy(bot.Id));
-                int ties = matchResults.Count(x => x.WinningPlayer == MatchOutcome.Neither); // TODO: Use this.
+                int ties = matchResults.Count(x => x.WinningPlayer == MatchOutcome.Neither);
 
-                botRankings.Add(new BotRecord
+                gameRecord.BotRecords.Add(new BotRecord
                 {
                     GameRecord = gameRecord,
                     Competitor = bot.Competitor,
@@ -51,7 +49,7 @@ namespace RockPaperScissor.Core.Game
             }
 
             List<FullResults> allMatchResults = GetFullResultsByPlayer(matchResults);
-            return new GameRunnerResult { BotRecords = botRankings, AllMatchResults = allMatchResults};
+            return new GameRunnerResult { GameRecord = gameRecord, AllMatchResults = allMatchResults };
         }
 
         private static List<FullResults> GetFullResultsByPlayer(List<MatchResult> matchResults)
@@ -65,7 +63,7 @@ namespace RockPaperScissor.Core.Game
             foreach (Competitor competitor in competitors)
             {
                 var collection = matchResults.Where(x => x.Player1 == competitor || x.Player2 == competitor).ToList();
-                allMatchResults.Add(new FullResults { Competitor = competitor, MatchResults = collection});
+                allMatchResults.Add(new FullResults { Competitor = competitor, MatchResults = collection });
             }
 
             return allMatchResults;
