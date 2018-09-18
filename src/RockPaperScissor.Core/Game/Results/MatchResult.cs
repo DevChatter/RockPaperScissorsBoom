@@ -4,7 +4,7 @@ using RockPaperScissor.Core.Model;
 
 namespace RockPaperScissor.Core.Game.Results
 {
-    public class MatchResult
+    public class MatchResult : BaseEntity
     {
         public Competitor Player1 { get; set; }
         public Competitor Player2 { get; set; }

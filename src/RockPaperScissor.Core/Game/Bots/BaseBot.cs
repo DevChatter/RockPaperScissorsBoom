@@ -5,13 +5,13 @@ using RockPaperScissor.Core.Model;
 
 namespace RockPaperScissor.Core.Game.Bots
 {
-    public abstract class BaseBot : IBot
+    public abstract class BaseBot
     {
         public Competitor Competitor { get; set; }
         public Guid Id => Competitor.Id;
 
         public string Name => Competitor.Name;
-        public int DynamiteUsed { get; private set; }
+        public int DynamiteUsed { get; protected set; }
         public void UseDynamite() => DynamiteUsed++;
         public abstract Decision GetDecision(PreviousDecisionResult previousResult);
 

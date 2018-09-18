@@ -1,16 +1,17 @@
 ﻿using RockPaperScissor.Core.Extensions;
+using RockPaperScissor.Core.Game.Bots;
 using RockPaperScissor.Core.Game.Results;
 
 namespace RockPaperScissor.Core.Game
 {
     public class RoundRunner
     {
-        public RoundResult RunRound(IBot player1, IBot player2, RoundResult previousResult)
+        public RoundResult RunRound(BaseBot player1, BaseBot player2, RoundResult previousResult)
         {
             var p1Decision = player1.GetDecision(previousResult.ToPlayerSpecific(player1));
             var p2Decision = player2.GetDecision(previousResult.ToPlayerSpecific(player2));
 
-            IBot winner = null;
+            BaseBot winner = null;
             // confirm each has a valid choice
             bool player1Invalid = IsInvalidDecision(p1Decision, player1);
             bool player2Invalid = IsInvalidDecision(p2Decision, player2);
@@ -48,32 +49,33 @@ namespace RockPaperScissor.Core.Game
 
             var roundResult = new RoundResult
             {
-                MatchId = previousResult.MatchId,
-                Winner = winner,
-                Player1 = player1,
-                Player2 = player2,
+                MatchResult = previousResult.MatchResult,
+                Winner = winner?.Competitor,
+                Player1 = player1.Competitor,
+                Player2 = player2.Competitor,
                 Player1Played = p1Decision,
                 Player2Played = p2Decision,
             };
 
-            ApplyDynamiteUsageToBots(roundResult);
+            ApplyDynamiteUsageToBots(player1, p1Decision, player2, p2Decision);
 
             return roundResult;
         }
 
-        private void ApplyDynamiteUsageToBots(RoundResult roundResult)
+        private void ApplyDynamiteUsageToBots(BaseBot player1, Decision p1Decision,
+            BaseBot player2, Decision p2Decision)
         {
-            if (roundResult.Player1Played == Decision.Dynamite)
+            if (p1Decision == Decision.Dynamite)
             {
-                roundResult.Player1.UseDynamite();
+                player1.UseDynamite();
             }
-            if (roundResult.Player2Played == Decision.Dynamite)
+            if (p2Decision == Decision.Dynamite)
             {
-                roundResult.Player2.UseDynamite();
+                player2.UseDynamite();
             }
         }
 
-        private bool IsInvalidDecision(Decision decision, IBot bot)
+        private bool IsInvalidDecision(Decision decision, BaseBot bot)
         {
             if (decision == Decision.Dynamite)
             {

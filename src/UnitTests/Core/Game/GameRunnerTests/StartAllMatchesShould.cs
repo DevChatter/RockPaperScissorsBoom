@@ -15,7 +15,7 @@ namespace UnitTests.Core.Game.GameRunnerTests
 
             var result = gameRunner.StartAllMatches();
 
-            result.BotRecords.Should().BeEmpty();
+            result.GameRecord.BotRecords.Should().BeEmpty();
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace UnitTests.Core.Game.GameRunnerTests
 
             var result = gameRunner.StartAllMatches();
 
-            result.BotRecords.Should().ContainSingle();
+            result.GameRecord.BotRecords.Should().ContainSingle();
         }
     }
 }
